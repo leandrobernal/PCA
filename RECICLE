@@ -1,0 +1,70 @@
+pygame de importação
+do  pygame . importação de habitantes  * 
+
+VERMELHO  = ( 255 , 0 , 0 )
+BRANCO  = ( 255 , 255 , 255 )
+
+ item de classe ( pygame . sprite . Sprite ):
+
+    def  __init__ ( auto , imagem , x , y ):
+        super (). __init__ ()
+        eu . image  =  pygame . imagem . carga ( imagem )
+        eu . rect  =  self . imagem . get_rect ( x = x , y = y )
+
+     atualização de definição ( self , rel ):
+        eu . rect . move_ip ( rel )
+
+pygame . init ()
+w , h  =  780 , 680
+display_surface  =  pygame . exibição . set_mode (( w , h ))
+tela  =  pygame . exibição . set_mode (( w , h ))
+background  =  pygame . imagem . load ( 'background.png' )
+pygame . exibição . set_caption ( "Recicle" )
+
+items  =  pygame . sprite . Grupo (
+    Item ( "plastico.jpg" , 223 , 55 ),
+    Item ( "banana.jpg" , 303 , 55 ),
+    Item ( "lata.jpg" , 383 , 55 ),
+    Item ( "papel.jpg" , 463 , 55 ),
+    Item ( "garrafa.jpg" , 543 , 55 ),
+)
+
+arrastado  =  pygame . sprite . Grupo ()
+
+running  =  True
+
+lixeira_azul  =  pygame . imagem . load ( 'lixeira_azul.png' )
+lixeira_vermelha  =  pygame . imagem . load ( 'lixeira_vermelha.png' )
+lixeira_amarela  =  pygame . imagem . load ( 'lixeira_amarela.png' )
+lixeira_verde  =  pygame . imagem . load ( 'lixeira_verde.png' )
+lixeira_marrom  =  pygame . imagem . load ( 'lixeira_marrom.png' )
+
+relógio  =  pygame . hora . Relógio ()
+game_exit  =  False
+
+enquanto  não  game_exit :
+
+    para  evento  em  pygame . evento . get ():
+        se  evento . digite  ==  pygame . SAIR :
+            game_exit  =  True
+         evento elif . digite  ==  pygame . MOUSEBUTTONDOWN :
+            arrastado . adicionar ( x  para  x  em  itens  se  x . rect . collidepoint ( evento . pos ))          
+         evento elif . digite  ==  pygame . MOUSEBUTTONUP :
+            arrastado . vazio ()
+         evento elif . digite  ==  pygame . MOUSEMOTION :
+            arrastado . atualização ( evento . rel )
+    
+    tela . preenchimento ( BRANCO )
+    tela . um pouco ( fundo , ( 0 , 0 ))
+    itens . desenhar ( tela )
+    display_surface . blit ( lixeira_azul , ( 20 , 510 ))
+    display_surface . blit ( lixeira_vermelha , ( 180 , 510 ))
+    display_surface . blit ( lixeira_amarela , ( 340 , 510 ))
+    display_surface . blit ( lixeira_verde , ( 520 , 510 ))
+    display_surface . blit ( lixeira_marrom , ( 680 , 510 ))
+    
+    pygame . exibição . update ()
+
+    relógio . carrapato ( 30 )
+
+pygame . quit ()
